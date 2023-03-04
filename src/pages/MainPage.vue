@@ -2,7 +2,7 @@
     <div class="main">
         <h1 class="main--word">asdsadasd</h1>
         <div class="description">
-        sasaa
+        {{users}}
         </div>
         <div>
         <div class="btns--top">
@@ -18,9 +18,18 @@
 </template>
   
 <script>
-    export default {
-    name: 'MainPage'
-    }
+import axios from "axios"
+export default {
+  name: 'MainPage',
+  async mounted() {
+    users = await axios.get("http://localhost:8081/users")
+  },
+  data() {
+    return {
+      users: []
+    };
+  },
+}
 </script>
   
 <style scoped>
