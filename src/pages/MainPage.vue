@@ -21,14 +21,23 @@
 import axios from "axios"
 export default {
   name: 'MainPage',
-  async mounted() {
-    users = await axios.get("http://localhost:8081/users")
-  },
   data() {
     return {
       users: []
     };
   },
+  async mounted() {
+    try {
+      const response = await axios.get("http://localhost:8081/users", {
+      headers: {
+        Accept: "application/json",
+      },
+    });
+    this.users = response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
 }
 </script>
   
