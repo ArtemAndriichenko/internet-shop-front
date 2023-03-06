@@ -3,6 +3,9 @@ import {createRouter, createWebHistory} from "vue-router";
 import MainPage from "../pages/MainPage.vue"
 import ProductPage from "../pages/ProductPage.vue"
 import OrderPage from "../pages/OrderPage.vue"
+import AuthPage from "../pages/AuthPage.vue"
+import RegistPage from "../pages/RegistPage.vue"
+import CartPage from "../pages/CartPage.vue"
 
 const routes = [
     {
@@ -16,6 +19,18 @@ const routes = [
     {
         path: '/orders',
         component: OrderPage
+    },
+    {
+        path: '/auth',
+        component: AuthPage
+    },
+    {
+        path: '/regist',
+        component: RegistPage
+    },
+    {
+        path: '/carts',
+        component: CartPage
     }
 ]
 

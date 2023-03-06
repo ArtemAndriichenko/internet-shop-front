@@ -9,23 +9,16 @@
         <button
           class="btn btn-success"
           type="button"
-          @click="$router.push('/products')"
-          >Products
+          @click="$router.push('/auth')"
+        >Authorization
         </button>
       </div>
       <div class="navbar__element">
         <button
           class="btn btn-success"
           type="button"
-          @click="$router.push('/orders')"
-        >Orders</button>
-      </div>
-      <div class="navbar__element">
-        <button
-          class="btn btn-success"
-          type="button"
-          @click="$router.push('/auth')"
-        >Log out</button>
+          @click="$router.push('/regist')"
+        >Registration</button>
       </div>
     </div>
   </div>
@@ -33,7 +26,7 @@
   
 <script>
 export default {
-  name: 'AppNavbar',
+  name: 'AuthNavbar',
 }
 </script>
   

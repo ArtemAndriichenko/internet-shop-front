@@ -9,16 +9,33 @@
         <button
           class="btn btn-success"
           type="button"
-          @click="$router.push('/products')"
-          >Products
+          @click="$router.push('/carts')"
+        >Carts
         </button>
       </div>
       <div class="navbar__element">
         <button
           class="btn btn-success"
           type="button"
-          @click="$router.push('/orders')"
+        >CartItems</button>
+      </div>
+      <div class="navbar__element">
+        <button
+          class="btn btn-success"
+          type="button"
         >Orders</button>
+      </div>
+      <div class="navbar__element">
+        <button
+          class="btn btn-success"
+          type="button"
+        >OrderItems</button>
+      </div>
+      <div class="navbar__element">
+        <button
+          class="btn btn-success"
+          type="button"
+        >Products</button>
       </div>
       <div class="navbar__element">
         <button
@@ -33,7 +50,7 @@
   
 <script>
 export default {
-  name: 'AppNavbar',
+  name: 'AdminNavbar',
 }
 </script>
   
