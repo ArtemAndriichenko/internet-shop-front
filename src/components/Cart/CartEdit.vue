@@ -83,7 +83,6 @@ export default {
         } catch (error) {
           console.error(error);
         }     
-        console.log(this.userProp)
       },
       getUsername(arr, userId){
         for(let i = 0; i < arr.length; i++){

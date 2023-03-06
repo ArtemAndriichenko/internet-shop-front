@@ -79,7 +79,7 @@ export default {
         const response = await axios.get("http://localhost:8081/carts", {
           headers: {
             Accept: "application/json",
-          },
+          }
         });
         this.carts = response.data
       } catch (error) {
@@ -107,12 +107,7 @@ export default {
     async deleteCart(item, i){
       if (confirm("Do you really want to remove the cart?")) {
         try {
-          await axios.delete("http://localhost:8081/carts/" + item.id, {
-            user_id: this.userProp,
-            headers: {
-              Accept: "application/json",
-            }
-          });
+          await axios.delete("http://localhost:8081/carts/" + item.id);
           this.carts.splice(i, 1);
         } catch (error) {
           console.error(error);
