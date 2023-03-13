@@ -1,3 +1,4 @@
+/* eslint-disable */
 <template>
   <div class="cart-list">
     <div class="btn--add">

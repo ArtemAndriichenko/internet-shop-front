@@ -126,7 +126,7 @@ export default {
     async deleteOrder(item, i){
       if (confirm("Do you really want to remove the order?")) {
         try {
-          await axios.delete("http://localhost:8081/order/" + item.id);
+          await axios.delete("http://localhost:8081/orders/" + item.id);
           this.orders.splice(i, 1);
         } catch (error) {
           console.error(error);

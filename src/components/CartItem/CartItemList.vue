@@ -47,7 +47,7 @@
         <div class="div__danger">
           <button
             class="btn btn-danger"
-            @click="deleteCart(item, i)"
+            @click="deleteCartItem(item, i)"
           >Delete</button>
         </div>
       </div>
