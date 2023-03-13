@@ -6,6 +6,7 @@
       </h1>
       <div class="input--element">
         <select class="form-select" v-model="productName" @change="setProduct()" >
+          <option value="" disabled hidden>Select product</option>
           <option v-for="item in products" :key="item._id">
             {{item.name}}
           </option>
@@ -13,6 +14,7 @@
       </div>
       <div class="input--element">
         <select class="form-select" v-model="orderId" >
+          <option value="" disabled hidden>Select order</option>
           <option v-for="item in orders" :key="item._id">
             {{item.id}}
           </option>

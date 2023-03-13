@@ -6,6 +6,7 @@
       </h1>
       <div class="input--element">
         <select class="form-select" v-model="status">
+          <option value="" disabled hidden>Select status</option>
           <option v-for="(item, index) in statuses" :key="index">
             {{item}}
           </option>
@@ -13,6 +14,7 @@
       </div>
       <div class="input--element">
         <select class="form-select" v-model="username" @change="setUser()" >
+          <option value="" disabled hidden>Select user</option>
           <option v-for="item in users" :key="item._id">
             {{item.username}}
           </option>
