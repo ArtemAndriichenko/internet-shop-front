@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <form @submit.prevent>
     <div class="create--order">
       <h1 class="create--label">
@@ -73,18 +74,91 @@ export default {
         this.$emit('updateShowAfterCreate', false)
     },
     async setUser(){
+=======
+    <form @submit.prevent>
+      <div class="create--patient">
+        <h1 class="create--label">
+            Create a Order
+        </h1>
+        <div class="input--element">
+          <select class="form-select" v-model="username" @change="setUser()" >
+            <option v-for="item in users" :key="item._id">
+              {{item.username}}
+            </option>
+          </select>
+        </div>
+        <div class="btn--element">
+          <button
+            class="btn btn-success"
+            @click="addOrder();
+            hideDialog()"
+          >Create</button>
+        </div>
+      </div>
+    </form>
+  </template>
+  
+  <script>
+  import axios from "axios";
+  
+  export default {
+    name: 'order-create',
+    data(){
+      return{
+        username: "",
+        userId: "",
+        users: []
+      }
+    },
+    methods: {
+      async addOrder() {
+        try {
+          await axios.post("http://localhost:8081/orders", {
+            user_id: this.userId,
+            headers: {
+              Accept: "application/json",
+            }
+          })
+        } catch(error){
+          console.log(error)
+        }
+      },
+      hideDialog(){
+          this.$emit('updateShowAfterCreate', false)
+      },
+      async setUser(){
+        try {
+          const response = await axios.get("http://localhost:8081/users", {
+            headers: {
+              Accept: "application/json",
+            },
+          });
+          const userList = response.data
+          this.userId = userList[userList.findIndex(i => i.username === this.username)].id
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    },
+    async mounted() {
+>>>>>>> d7f11bc28f458076d4aaad1d9c3de5daab34e20a
       try {
         const response = await axios.get("http://localhost:8081/users", {
           headers: {
             Accept: "application/json",
           },
         });
+<<<<<<< HEAD
         const userList = response.data
         this.userId = userList[userList.findIndex(i => i.username === this.username)].id
+=======
+        this.users = response.data
+>>>>>>> d7f11bc28f458076d4aaad1d9c3de5daab34e20a
       } catch (error) {
         console.error(error);
       }
     }
+<<<<<<< HEAD
   },
   async mounted() {
     try {
@@ -131,3 +205,38 @@ export default {
     width: 100%;
 }
 </style>
+=======
+  }
+  </script>
+  
+  <style scoped>
+  .create--patient{
+      padding-block: 30px;
+      padding-inline: 60px;
+  }
+  .form-control{
+      border-color: #0c3823;
+      font-size: 20px;
+  }
+  .form-select{
+      border-color: #0c3823;
+      font-size: 20px;
+  }
+  .input--element{
+      margin-block: 30px 30px;
+  }
+  .btn--element{
+      margin-top: 30px;
+  }
+  .create--label{
+      padding: 10px;
+      text-align: center;
+      font-size: 28px;
+      color: #0c3823;
+  }
+  .btn{
+      font-size: 20px;
+      width: 100%;
+  }
+  </style>
+>>>>>>> d7f11bc28f458076d4aaad1d9c3de5daab34e20a
