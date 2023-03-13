@@ -18,7 +18,7 @@
 <script>
 import axios from "axios"
 export default {
-  name: 'MainPage',
+  name: 'main-page',
   data() {
     return {
       users: []

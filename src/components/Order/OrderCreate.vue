@@ -1,9 +1,16 @@
 <template>
   <form @submit.prevent>
-    <div class="create--cart">
+    <div class="create--order">
       <h1 class="create--label">
-          Create a Cart
+        Create an Order
       </h1>
+      <div class="input--element">
+        <select class="form-select" v-model="status">
+          <option v-for="(item, index) in statuses" :key="index">
+            {{item}}
+          </option>
+        </select>
+      </div>
       <div class="input--element">
         <select class="form-select" v-model="username" @change="setUser()" >
           <option v-for="item in users" :key="item._id">
@@ -11,10 +18,18 @@
           </option>
         </select>
       </div>
+      <div class="input--element">
+        <input
+          class="form-control"
+          v-model="address"
+          type="text"
+          placeholder="Enter a product address"
+        >
+      </div>
       <div class="btn--element">
         <button
           class="btn btn-success"
-          @click="addCart();
+          @click="addOrder();
           hideDialog()"
         >Create</button>
       </div>
@@ -26,19 +41,26 @@
 import axios from "axios";
 
 export default {
-  name: 'cart-create',
+  name: 'product-create',
   data(){
     return{
-      username: "",
-      userId: "",
-      users: []
+      status: '',
+      username: '',
+      userId: '',
+      users: [],
+      address: '',
+      statuses: ['Pending', 'Processing', 'Payment Received', 'Shipped', 
+      'Delivered', 'Accepted', 'Cancelled', 'Refunded', 'Returned', 'On Hold']
     }
   },
   methods: {
-    async addCart() {
+    async addOrder() {
+      console.log(this.status)
       try {
-        await axios.post("http://localhost:8081/carts", {
+        await axios.post("http://localhost:8081/orders", {
+          status: this.status,
           user_id: this.userId,
+          address: this.address,
           headers: {
             Accept: "application/json",
           }
@@ -80,7 +102,7 @@ export default {
 </script>
 
 <style scoped>
-.create--cart{
+.create--order{
     padding-block: 30px;
     padding-inline: 60px;
 }

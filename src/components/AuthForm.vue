@@ -33,7 +33,7 @@
 import axios from "axios"
 
 export default {
-  name: "AuthForm",
+  name: "auth-form",
   data(){
     return{
       username: '',
@@ -66,6 +66,7 @@ export default {
       } 
 
       for(let i = 0; i < this.users.length; i++){
+        console.log(this.users)
         if(this.users[i].username === this.username && this.users[i].password === this.password){
           this.$router.push('/main')
           this.$store.commit('auth/setAuthUser')

@@ -41,7 +41,7 @@
 import axios from "axios"
 
 export default {
-  name: "RegistForm",
+  name: "regist-form",
   data(){
     return{
       username: '',

@@ -1,8 +1,15 @@
 <template>
-  <div class="edit-cart">
+  <div class="edit--order">
     <h1 class="edit--label">
-      Edit the Cart
+      Edit the Order
     </h1>
+    <div class="input--element">
+      <select class="form-select" v-model="statusProp">
+        <option v-for="(item, index) in statuses" :key="index">
+          {{item}}
+        </option>
+      </select>
+    </div>
     <div class="input--element">
       <select class="form-select" v-model="username" @change="setUser()" >
         <option v-for="item in users" :key="item._id">
@@ -10,10 +17,16 @@
         </option>
       </select>
     </div>
+    <div class="input--element">
+      <input
+        class="form-control"
+        v-model="addressProp"
+      >
+    </div>
     <div class="btn--element">
       <button
         class="btn btn-warning"
-        @click="editCart();
+        @click="editOrder();
         hideDialog()"
       >Save</button>
     </div>
@@ -24,14 +37,27 @@
 import axios from "axios"
 
 export default {
-  name: 'cart-edit',
+  name: 'order-edit',
   props: {
     itemProp: Object
   },
   computed: {
-    cartId: {
+    orderId: {
       get(){
-        return this.itemProp.id
+        return this.itemProp.id;
+      }
+    },
+    statusProp: {
+      get(){
+        if(this.status == ''){
+          return this.itemProp.status;
+        }
+        else{
+          return this.status
+        }
+      },
+      set(value){
+        this.status = value
       }
     },
     userProp: {
@@ -46,21 +72,40 @@ export default {
       set(value){
         this.userId = value
       }
+    },
+    addressProp:{
+      get(){
+        if(this.address == ''){
+          return this.itemProp.address
+        }
+        else{
+          return this.address;
+        }
+      },
+      set(value){
+        this.address = value
+      }
     }
   },
   data(){
     return{
+      status: '',
       username: '',
       userId: '',
-      users: []
+      users: [],
+      address: '',
+      statuses: ['Pending', 'Processing', 'Payment Received', 'Shipped', 
+      'Delivered', 'Accepted', 'Cancelled', 'Refunded', 'Returned', 'On Hold']
     }
   },
   methods:{
-    async editCart(){
-      console.log(typeof this.userProp)
+    async editOrder(){
+      this.price = parseFloat(this.price)
       try {
-        await axios.put("http://localhost:8081/carts/" + this.cartId, {
+        await axios.put("http://localhost:8081/orders/" + this.orderId, {
+          status: this.statusProp,
           user_id: this.userProp,
+          address: this.addressProp,
           headers: {
             Accept: "application/json",
           }
@@ -70,7 +115,7 @@ export default {
       }  
     },
     async hideDialog(){
-        this.$emit('updateShowAfterUpdate', false)
+      this.$emit('updateShowAfterUpdate', false)
     },
     async setUser(){
       try {
@@ -112,7 +157,7 @@ export default {
 </script>
 
 <style scoped>
-.edit-cart{
+.edit-order{
   padding-block: 30px;
   padding-inline: 60px;
 }

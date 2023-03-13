@@ -1,23 +1,23 @@
 <template>
-  <div class="cart-list">
+  <div class="order-list">
     <div class="btn--add">
       <button
         class="btn btn-outline-success"
         @click="showDialogCreate"
-      >Create a Cart</button>
+      >Create a Order</button>
     </div>
     <my-dialog :show="dialogVisiable" @updateShow='hideDialogCreate'>
-      <cart-create
+      <order-create
         v-if="createOrEdit"
         @updateShowAfterCreate='hideDialogCreate'
-      ></cart-create>
-      <cart-edit
+      ></order-create>
+      <order-edit
         v-else
         :itemProp='setItem'
         @updateShowAfterUpdate='hideDialogEdit'
-      ></cart-edit>
+      ></order-edit>
     </my-dialog>
-    <div class="list--table" v-for="(item, i) in carts" :key="item._id">
+    <div class="list--table" v-for="(item, i) in orders" :key="item._id">
       <table class="table table-hover">
         <thead>
           <tr>
@@ -26,8 +26,26 @@
         </thead>
         <tbody>
           <tr>
+            <td scope="col">status</td>
+            <td>{{item.status}}</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td scope="col">price</td>
+            <td>{{item.price}}</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
             <td scope="col">user_id</td>
             <td>{{item.user_id}}</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td scope="col">address</td>
+            <td>{{item.address}}</td>
           </tr>
         </tbody>
       </table>
@@ -41,7 +59,7 @@
         <div class="div__danger">
           <button
             class="btn btn-danger"
-            @click="deleteCart(item, i)"
+            @click="deleteOrder(item, i)"
           >Delete</button>
         </div>
       </div>
@@ -52,19 +70,19 @@
 <script>
 import axios from "axios";
 import MyDialogVue from '../UI/MyDialog.vue'
-import CartCreate from './CartCreate.vue'
-import CartEdit from './CartEdit.vue'
+import OrderCreate from './OrderCreate.vue'
+import OrderEdit from './OrderEdit.vue'
 
 export default {
-  name: "cart-list",
+  name: "order-list",
   components: {
     "my-dialog": MyDialogVue,
-    "cart-create": CartCreate,
-    "cart-edit": CartEdit
+    "order-create": OrderCreate,
+    "order-edit": OrderEdit
   },
   data() {
     return {
-      carts: [],
+      orders: [],
       dialogVisiable: false,
       setItem: {},
       createOrEdit: false
@@ -76,12 +94,12 @@ export default {
   methods: {
     async startComponent(){
       try {
-        const response = await axios.get("http://localhost:8081/carts", {
+        const response = await axios.get("http://localhost:8081/orders", {
           headers: {
             Accept: "application/json",
           }
         });
-        this.carts = response.data
+        this.orders = response.data
       } catch (error) {
         console.error(error);
       }
@@ -96,20 +114,20 @@ export default {
       this.dialogVisiable = true
     },
     async hideDialogEdit(bool){
-      await new Promise((resolve) => setTimeout(resolve, 50))
+      await new Promise((resolve) => setTimeout(resolve, 50));
       await this.startComponent()
       this.dialogVisiable = bool
     },
     async hideDialogCreate(bool){
-      await new Promise((resolve) => setTimeout(resolve, 50))
+      await new Promise((resolve) => setTimeout(resolve, 50));
       await this.startComponent()
       this.dialogVisiable = bool
     },
-    async deleteCart(item, i){
-      if (confirm("Do you really want to remove the cart?")) {
+    async deleteOrder(item, i){
+      if (confirm("Do you really want to remove the order?")) {
         try {
-          await axios.delete("http://localhost:8081/carts/" + item.id);
-          this.carts.splice(i, 1);
+          await axios.delete("http://localhost:8081/order/" + item.id);
+          this.orders.splice(i, 1);
         } catch (error) {
           console.error(error);
         } 

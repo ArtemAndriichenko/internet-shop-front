@@ -1,6 +1,6 @@
 export const authModule = {
     state: () => ({
-        isAdmin: false,
+        isAdmin: true,
         isUser: false
     }),
     mutations: {

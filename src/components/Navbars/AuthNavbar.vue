@@ -26,7 +26,7 @@
   
 <script>
 export default {
-  name: 'AuthNavbar',
+  name: 'auth-navbar',
 }
 </script>
   

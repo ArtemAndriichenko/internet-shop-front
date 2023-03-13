@@ -8,7 +8,7 @@
 import RegistForm from '../components/RegistForm.vue'
 
 export default {
-  name: 'RegistPage',
+  name: 'regist-page',
   components: {
     "regist-form": RegistForm
   }

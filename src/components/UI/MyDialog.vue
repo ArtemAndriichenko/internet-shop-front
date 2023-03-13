@@ -11,13 +11,13 @@ export default {
   name: 'my-dialog',
   props: {
     show: {
-        type: Boolean,
-        defoult: false
+      type: Boolean,
+      defoult: false
     }
   },
   methods: {
-    hideDialog(){
-        this.$emit('updateShow', false)
+    async hideDialog(){
+      this.$emit('updateShow', false)
     }
   }
 }

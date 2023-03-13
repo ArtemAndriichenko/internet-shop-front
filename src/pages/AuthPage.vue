@@ -8,7 +8,7 @@
 import AuthForm from '../components/AuthForm.vue'
 
 export default {
-  name: 'AuthPage',
+  name: 'auth-page',
   components: {
     "auth-form": AuthForm
   }

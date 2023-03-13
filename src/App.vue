@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import AuthNavbar from './components/AuthNavbar.vue'
-import AdminNavbar from './components/AdminNavbar.vue'
-import AppNavbar from './components/AppNavbar.vue'
+import AuthNavbar from './components/Navbars/AuthNavbar.vue'
+import AdminNavbar from './components/Navbars/AdminNavbar.vue'
+import AppNavbar from './components/Navbars/AppNavbar.vue'
 
 export default {
   name: 'App',

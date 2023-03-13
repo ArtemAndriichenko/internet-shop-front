@@ -4,20 +4,20 @@
       <button
         class="btn btn-outline-success"
         @click="showDialogCreate"
-      >Create a Cart</button>
+      >Create a Cart Item</button>
     </div>
     <my-dialog :show="dialogVisiable" @updateShow='hideDialogCreate'>
-      <cart-create
+      <cart-item-create
         v-if="createOrEdit"
         @updateShowAfterCreate='hideDialogCreate'
-      ></cart-create>
-      <cart-edit
+      ></cart-item-create>
+      <cart-item-edit
         v-else
         :itemProp='setItem'
         @updateShowAfterUpdate='hideDialogEdit'
-      ></cart-edit>
+      ></cart-item-edit>
     </my-dialog>
-    <div class="list--table" v-for="(item, i) in carts" :key="item._id">
+    <div class="list--table" v-for="(item, i) in cartItems" :key="item._id">
       <table class="table table-hover">
         <thead>
           <tr>
@@ -26,8 +26,14 @@
         </thead>
         <tbody>
           <tr>
-            <td scope="col">user_id</td>
-            <td>{{item.user_id}}</td>
+            <td scope="col">product_id</td>
+            <td>{{item.product_id}}</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td scope="col">cart_id</td>
+            <td>{{item.cart_id}}</td>
           </tr>
         </tbody>
       </table>
@@ -52,19 +58,19 @@
 <script>
 import axios from "axios";
 import MyDialogVue from '../UI/MyDialog.vue'
-import CartCreate from './CartCreate.vue'
-import CartEdit from './CartEdit.vue'
+import CartItemCreate from './CartItemCreate.vue'
+import CartItemEdit from './CartItemEdit.vue'
 
 export default {
-  name: "cart-list",
+  name: "cart-item-list",
   components: {
     "my-dialog": MyDialogVue,
-    "cart-create": CartCreate,
-    "cart-edit": CartEdit
+    "cart-item-create": CartItemCreate,
+    "cart-item-edit": CartItemEdit
   },
   data() {
     return {
-      carts: [],
+      cartItems: [],
       dialogVisiable: false,
       setItem: {},
       createOrEdit: false
@@ -76,12 +82,12 @@ export default {
   methods: {
     async startComponent(){
       try {
-        const response = await axios.get("http://localhost:8081/carts", {
+        const response = await axios.get("http://localhost:8081/cartItems", {
           headers: {
             Accept: "application/json",
           }
         });
-        this.carts = response.data
+        this.cartItems = response.data
       } catch (error) {
         console.error(error);
       }
@@ -96,20 +102,20 @@ export default {
       this.dialogVisiable = true
     },
     async hideDialogEdit(bool){
-      await new Promise((resolve) => setTimeout(resolve, 50))
+      await new Promise((resolve) => setTimeout(resolve, 50));
       await this.startComponent()
       this.dialogVisiable = bool
     },
     async hideDialogCreate(bool){
-      await new Promise((resolve) => setTimeout(resolve, 50))
+      await new Promise((resolve) => setTimeout(resolve, 50));
       await this.startComponent()
       this.dialogVisiable = bool
     },
-    async deleteCart(item, i){
-      if (confirm("Do you really want to remove the cart?")) {
+    async deleteCartItem(item, i){
+      if (confirm("Do you really want to remove the cart item?")) {
         try {
-          await axios.delete("http://localhost:8081/carts/" + item.id);
-          this.carts.splice(i, 1);
+          await axios.delete("http://localhost:8081/cartItems/" + item.id);
+          this.cartItems.splice(i, 1);
         } catch (error) {
           console.error(error);
         } 

@@ -1,12 +1,17 @@
 <template>
   <div>
-    <p>The Order Page</p>
+    <order-list></order-list>
   </div>
 </template>
   
 <script>
+import OrderList from "../components/Order/OrderList.vue"
+
 export default {
-  name: 'OrderPage'
+  name: 'order-page',
+  components: {
+    "order-list": OrderList
+  }
 }
 </script>
   

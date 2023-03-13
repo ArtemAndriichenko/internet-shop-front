@@ -1,20 +1,27 @@
 <template>
   <form @submit.prevent>
-    <div class="create--cart">
+    <div class="create--cart--item">
       <h1 class="create--label">
-          Create a Cart
+          Create a Cart Item
       </h1>
       <div class="input--element">
-        <select class="form-select" v-model="username" @change="setUser()" >
-          <option v-for="item in users" :key="item._id">
-            {{item.username}}
+        <select class="form-select" v-model="productName" @change="setProduct()" >
+          <option v-for="item in products" :key="item._id">
+            {{item.name}}
+          </option>
+        </select>
+      </div>
+      <div class="input--element">
+        <select class="form-select" v-model="cartId" >
+          <option v-for="item in carts" :key="item._id">
+            {{item.id}}
           </option>
         </select>
       </div>
       <div class="btn--element">
         <button
           class="btn btn-success"
-          @click="addCart();
+          @click="addCartItem();
           hideDialog()"
         >Create</button>
       </div>
@@ -26,19 +33,23 @@
 import axios from "axios";
 
 export default {
-  name: 'cart-create',
+  name: 'cart-item-create',
   data(){
     return{
-      username: "",
-      userId: "",
-      users: []
+      productName: "",
+      productId: "",
+      cartId: "",
+      products: [],
+      carts: []
     }
   },
   methods: {
-    async addCart() {
+    async addCartItem() {
+      this.cartId = Number(this.cartId)
       try {
-        await axios.post("http://localhost:8081/carts", {
-          user_id: this.userId,
+        await axios.post("http://localhost:8081/cartItems", {
+          product_id: this.productId,
+          cart_id: this.cartId,
           headers: {
             Accept: "application/json",
           }
@@ -50,15 +61,15 @@ export default {
     hideDialog(){
         this.$emit('updateShowAfterCreate', false)
     },
-    async setUser(){
+    async setProduct(){
       try {
-        const response = await axios.get("http://localhost:8081/users", {
+        const response = await axios.get("http://localhost:8081/products", {
           headers: {
             Accept: "application/json",
           },
         });
-        const userList = response.data
-        this.userId = userList[userList.findIndex(i => i.username === this.username)].id
+        const productList = response.data
+        this.productId = productList[productList.findIndex(i => i.name === this.productName)].id
       } catch (error) {
         console.error(error);
       }
@@ -66,12 +77,23 @@ export default {
   },
   async mounted() {
     try {
-      const response = await axios.get("http://localhost:8081/users", {
+      const response = await axios.get("http://localhost:8081/carts", {
         headers: {
           Accept: "application/json",
         },
       });
-      this.users = response.data
+      this.carts = response.data
+    } catch (error) {
+      console.error(error);
+    }
+
+    try {
+      const response = await axios.get("http://localhost:8081/products", {
+        headers: {
+          Accept: "application/json",
+        },
+      });
+      this.products = response.data
     } catch (error) {
       console.error(error);
     }
@@ -80,7 +102,7 @@ export default {
 </script>
 
 <style scoped>
-.create--cart{
+.create--cart--item{
     padding-block: 30px;
     padding-inline: 60px;
 }
