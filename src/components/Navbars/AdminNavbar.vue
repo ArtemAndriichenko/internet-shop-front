@@ -45,6 +45,13 @@
         <button
           class="btn btn-success"
           type="button"
+          @click="$router.push('/products/price')"
+        >Product Price</button>
+      </div>
+      <div class="navbar__element">
+        <button
+          class="btn btn-success"
+          type="button"
           @click="$router.push('/auth')"
         >Log out</button>
       </div>
