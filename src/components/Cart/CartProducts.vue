@@ -1,5 +1,12 @@
-/* eslint-disable */
 <template>
+  <div>
+    <my-dialog :show="dialogVisiable" @updateShow='hideDialogCreate'>
+      <admin-cart-edit
+        :itemProp='setItem'
+        @updateShowAfterUpdate='hideDialogEdit'
+      ></admin-cart-edit>
+    </my-dialog>
+  </div>
   <div class="product-list">
     <div class="list--table" v-for="item in products" :key="item.id">
       <img :src="item.image" width="280" height="182">
@@ -9,13 +16,13 @@
       <div>
         {{item.price}}
       </div>
-      <button 
-        class="btn btn-outline-success" 
-        @click="addCartItem(item.id)"
-      >
-        Add
-      </button>
     </div>
+  </div>
+  <div>
+    <h2>Price: {{this.priceAll}}</h2>
+  </div>
+  <div class="btn--add">
+    <button class="btn btn-outline-success" >Checkout</button>
   </div>
 </template>
 
@@ -23,10 +30,12 @@
 import axios from "axios";
 
 export default {
-  name: "product-list",
+  name: "cart-products",
   data() {
     return {
-      products: []
+      cartItems: [],
+      products: [],
+      priceAll: 0
     };
   },
   async mounted() {
@@ -35,29 +44,31 @@ export default {
   methods: {
     async startComponent(){
       try {
-        const response = await axios.get("http://localhost:8081/products", {
+        const response = await axios.get("http://localhost:8081/cart/cartItems/" + this.$store.state.auth.cartId, {
           headers: {
             Accept: "application/json",
           }
         });
-        this.products = response.data
+        this.cartItems = response.data
       } catch (error) {
         console.error(error);
       }
+
+      for(let i = 0; i < this.cartItems.length; i++) {
+        this.getProduct(this.cartItems[i].product_id)
+      }
     },
-    async addCartItem(productId){
-      console.log(productId)
-      console.log(this.$store.state.auth.cartId)
+    async getProduct(productId) {
       try {
-        await axios.post("http://localhost:8081/cartItems", {
-          product_id: productId,
-          cart_id: this.$store.state.auth.cartId,
+        const response = await axios.get("http://localhost:8081/products/" + productId, {
           headers: {
             Accept: "application/json",
           }
-        })
-      } catch(error){
-        console.log(error)
+        });
+        this.products.push(response.data)
+        this.priceAll += response.data.price
+      } catch (error) {
+        console.error(error);
       }
     }
   }
@@ -100,5 +111,14 @@ td{
 }
 .div__danger{
   width: 130px;
+}
+.btn--add{
+  margin-inline: 190px;
+  margin-block: 40px 50px;
+  background: #d2ffea;
+}
+h2{
+  margin-top: 30px;
+  text-align:center
 }
 </style>

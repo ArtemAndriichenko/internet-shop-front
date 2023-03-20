@@ -1,16 +1,16 @@
 <template>
   <div>
-    <cart-products></cart-products>
+    <admin-cart-list></admin-cart-list>
   </div>
 </template>
 
 <script>
-import CartProducts from "../components/Cart/CartProducts.vue"
+import AdminCartList from "../components/Cart/AdminCartList.vue"
 
 export default {
   name: 'admin-cart-page',
   components: {
-    "cart-products": CartProducts
+    "admin-cart-list": AdminCartList
   }
 }
 </script>

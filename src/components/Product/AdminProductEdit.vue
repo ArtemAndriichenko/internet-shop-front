@@ -16,6 +16,18 @@
         v-model="priceProp"
       >
     </div>
+    <div class="input--element">
+      <textarea
+        class="form-control"
+        v-model="imageProp"
+      />
+    </div>
+    <div class="input--element">
+      <textarea
+        class="form-control"
+        v-model="descriptionProp"
+      />
+    </div>
     <div class="btn--element">
       <button
         class="btn btn-warning"
@@ -30,7 +42,7 @@
 import axios from "axios"
 
 export default {
-  name: 'product-edit',
+  name: 'admin-product-edit',
   props: {
     itemProp: Object
   },
@@ -65,12 +77,40 @@ export default {
       set(value){
         this.price = value
       }
+    },
+    imageProp:{
+      get(){
+        if(this.imageUrl == ""){
+          return this.itemProp.image
+        }
+        else{
+          return this.imageUrl;
+        }
+      },
+      set(value){
+        this.imageUrl = value
+      }
+    },
+    descriptionProp:{
+      get(){
+        if(this.description == ""){
+          return this.itemProp.description
+        }
+        else{
+          return this.description;
+        }
+      },
+      set(value){
+        this.description = value
+      }
     }
   },
   data(){
     return{
       name: '',
-      price: 0
+      price: 0,
+      description: "",
+      imageUrl: ""
     }
   },
   methods:{
@@ -80,6 +120,8 @@ export default {
         await axios.put("http://localhost:8081/products/" + this.productId, {
           name: this.nameProp,
           price: this.priceProp,
+          description: this.descriptionProp,
+          image: this.imageProp,
           headers: {
             Accept: "application/json",
           }

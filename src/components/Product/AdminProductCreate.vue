@@ -20,6 +20,22 @@
           placeholder="Enter a product price"
         >
       </div>
+      <div class="input--element">
+        <textarea
+          class="form-control"
+          v-model="description"
+          type="text"
+          placeholder="Enter a description"
+        />
+      </div>
+      <div class="input--element">
+        <textarea 
+          class="form-control"
+          v-model="imageUrl"
+          type="text"
+          placeholder="Enter a url of image"
+        />
+      </div>
       <div class="btn--element">
         <button
           class="btn btn-success"
@@ -35,11 +51,13 @@
 import axios from "axios";
 
 export default {
-  name: 'product-create',
+  name: 'admin-product-create',
   data(){
     return{
       name: "",
-      price: 0
+      price: 0,
+      description: "",
+      imageUrl: ""
     }
   },
   methods: {
@@ -49,6 +67,8 @@ export default {
         await axios.post("http://localhost:8081/products", {
           name: this.name,
           price: this.price,
+          description: this.description,
+          image: this.imageUrl,
           headers: {
             Accept: "application/json",
           }

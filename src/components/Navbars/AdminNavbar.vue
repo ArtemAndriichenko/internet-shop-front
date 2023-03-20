@@ -2,14 +2,14 @@
   <div class="navbar">
     <div
       class="navbar__logo"
-      @click="$router.push('/')"
+      @click="$router.push('/main')"
     >Shop</div>
     <div class="navbar__location">
       <div class="navbar__element">
         <button
           class="btn btn-success"
           type="button"
-          @click="$router.push('/carts')"
+          @click="$router.push('/admin/carts')"
         >Carts
         </button>
       </div>
@@ -17,35 +17,35 @@
         <button
           class="btn btn-success"
           type="button"
-          @click="$router.push('/carts/items')"
+          @click="$router.push('/admin/carts/items')"
         >CartItems</button>
       </div>
       <div class="navbar__element">
         <button
           class="btn btn-success"
           type="button"
-          @click="$router.push('/orders')"
+          @click="$router.push('/admin/orders')"
         >Orders</button>
       </div>
       <div class="navbar__element">
         <button
           class="btn btn-success"
           type="button"
-          @click="$router.push('/orders/items')"
+          @click="$router.push('/admin/orders/items')"
         >OrderItems</button>
       </div>
       <div class="navbar__element">
         <button
           class="btn btn-success"
           type="button"
-          @click="$router.push('/products')"
+          @click="$router.push('/admin/products')"
         >Products</button>
       </div>
       <div class="navbar__element">
         <button
           class="btn btn-success"
           type="button"
-          @click="$router.push('/products/price')"
+          @click="$router.push('/admin/products/price')"
         >Product Price</button>
       </div>
       <div class="navbar__element">

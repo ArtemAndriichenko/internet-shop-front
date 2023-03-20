@@ -39,6 +39,7 @@ export default {
       username: '',
       password: '',
       users: [],
+      cartId: 0,
       isError: false
     }
   },
@@ -59,7 +60,7 @@ export default {
         console.error(error)
       }
     },
-    verificationAuth(){
+    async verificationAuth(){
       if(this.username == 'admin' && this.password == 'admin'){
           this.$router.push('/main')
           this.$store.commit('auth/setAuthAdmin')
@@ -68,12 +69,29 @@ export default {
       for(let i = 0; i < this.users.length; i++){
         console.log(this.users)
         if(this.users[i].username === this.username && this.users[i].password === this.password){
-          this.$router.push('/main')
+          await this.getCartIdByUserId(this.users[i].id)
           this.$store.commit('auth/setAuthUser')
+          this.$store.commit('auth/setUserId', this.users[i].id)
+          this.$store.commit('auth/setUsername', this.users[i].username)
+          this.$store.commit('auth/setUserPassword', this.users[i].password)
+          this.$store.commit('auth/setCartId', this.cartId)
+          this.$router.push('/main')
         }
       }
 
       this.isError = true
+    },
+    async getCartIdByUserId(id){
+      try {
+        const response = await axios.get("http://localhost:8081/carts/user/" + id, {
+          headers: {
+            Accept: "application/json",
+          },
+        })
+        this.cartId = response.data.id
+      } catch (error) {
+        console.error(error)
+      }
     }
   }
 }

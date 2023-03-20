@@ -1,7 +1,11 @@
 export const authModule = {
     state: () => ({
-        isAdmin: true,
-        isUser: false
+        isAdmin: false,
+        isUser: true,
+        userId: 0,
+        username: "",
+        password: "",
+        cartId: 0
     }),
     mutations: {
         setAuthAdmin(state){
@@ -15,6 +19,18 @@ export const authModule = {
         setNotUser(state){
             state.isAdmin = false
             state.isUser = false
+        },
+        setUserId(state, userIdP){
+            state.userId += userIdP
+        },
+        setUsername(state, usernameP){
+            state.username += usernameP
+        },
+        setUserPassword(state, passwordP){
+            state.password += passwordP
+        },
+        setCartId(state, cartIdP){
+            state.cartId = cartIdP
         }
     },
     namespaced: true

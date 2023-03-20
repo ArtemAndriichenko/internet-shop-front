@@ -2,7 +2,7 @@
   <div class="navbar">
     <div
       class="navbar__logo"
-      @click="$router.push('/')"
+      @click="$router.push('/main')"
     >Shop</div>
     <div class="navbar__location">
       <div class="navbar__element">
@@ -17,8 +17,8 @@
         <button
           class="btn btn-success"
           type="button"
-          @click="$router.push('/orders')"
-        >Orders</button>
+          @click="$router.push('/cart')"
+        >Cart</button>
       </div>
       <div class="navbar__element">
         <button

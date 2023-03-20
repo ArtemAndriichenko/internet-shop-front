@@ -1,26 +1,28 @@
 import {createRouter, createWebHistory} from "vue-router";
 
 import MainPage from "../pages/MainPage.vue"
-import ProductPage from "../pages/ProductPage.vue"
+import AdminProductPage from "../pages/AdminProductPage.vue"
 import OrderPage from "../pages/OrderPage.vue"
 import AuthPage from "../pages/AuthPage.vue"
 import RegistPage from "../pages/RegistPage.vue"
-import CartPage from "../pages/CartPage.vue"
+import AdminCartPage from "../pages/AdminCartPage.vue"
 import CartItemPage from "../pages/CartItemPage.vue"
 import OrderItemPage from "../pages/OrderItemPage.vue"
 import ProductByPricePage from "../pages/ProductByPricePage.vue"
+import ProductPage from "../pages/ProductPage.vue"
+import CartPage from "../pages/CartPage.vue"
 
 const routes = [
     {
-        path: '/',
+        path: '/main',
         component: MainPage
     },
     {
-        path: '/products',
-        component: ProductPage
+        path: '/admin/products',
+        component: AdminProductPage
     },
     {
-        path: '/orders',
+        path: '/admin/orders',
         component: OrderPage
     },
     {
@@ -28,24 +30,32 @@ const routes = [
         component: AuthPage
     },
     {
-        path: '/regist',
+        path: '/admin/regist',
         component: RegistPage
     },
     {
-        path: '/carts',
-        component: CartPage
+        path: '/admin/carts',
+        component: AdminCartPage
     },
     {
-        path: '/carts/items',
+        path: '/admin/carts/items',
         component: CartItemPage
     },
     {
-        path: '/orders/items',
+        path: '/admin/orders/items',
         component: OrderItemPage
     },
     {
-        path: '/products/price',
+        path: '/admin/products/price',
         component: ProductByPricePage
+    },
+    {
+        path: '/products',
+        component: ProductPage
+    },
+    {
+        path: '/cart',
+        component: CartPage
     }
 ]
 

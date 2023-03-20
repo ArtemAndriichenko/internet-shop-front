@@ -27,7 +27,7 @@
 import axios from "axios";
 
 export default {
-  name: 'cart-create',
+  name: 'admin-cart-create',
   data(){
     return{
       username: "",

@@ -8,7 +8,7 @@
 import ProductList from "../components/Product/ProductList.vue"
 
 export default {
-  name: 'product-page',
+  name: 'admin-product-page',
   components: {
     "product-list": ProductList
   }

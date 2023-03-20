@@ -7,15 +7,15 @@
       >Create a Cart</button>
     </div>
     <my-dialog :show="dialogVisiable" @updateShow='hideDialogCreate'>
-      <cart-create
+      <admin-cart-create
         v-if="createOrEdit"
         @updateShowAfterCreate='hideDialogCreate'
-      ></cart-create>
-      <cart-edit
+      ></admin-cart-create>
+      <admin-cart-edit
         v-else
         :itemProp='setItem'
         @updateShowAfterUpdate='hideDialogEdit'
-      ></cart-edit>
+      ></admin-cart-edit>
     </my-dialog>
     <div class="list--table" v-for="(item, i) in carts" :key="item._id">
       <table class="table table-hover">
@@ -52,15 +52,15 @@
 <script>
 import axios from "axios";
 import MyDialogVue from '../UI/MyDialog.vue'
-import CartCreate from './CartCreate.vue'
-import CartEdit from './CartEdit.vue'
+import AdminCartCreate from './AdminCartCreate.vue'
+import AdminCartEdit from './AdminCartEdit.vue'
 
 export default {
   name: "cart-list",
   components: {
     "my-dialog": MyDialogVue,
-    "cart-create": CartCreate,
-    "cart-edit": CartEdit
+    "admin-cart-create": AdminCartCreate,
+    "admin-cart-edit": AdminCartEdit
   },
   data() {
     return {
@@ -108,8 +108,8 @@ export default {
     async deleteCart(item, i){
       if (confirm("Do you really want to remove the cart?")) {
         try {
-          await axios.delete("http://localhost:8081/carts/" + item.id);
-          this.carts.splice(i, 1);
+          await axios.delete("http://localhost:8081/carts/" + item.id)
+          this.carts.splice(i, 1)
         } catch (error) {
           console.error(error);
         } 

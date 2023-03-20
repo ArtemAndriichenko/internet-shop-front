@@ -1,16 +1,16 @@
 <template>
   <div class="main">
-    <h1 class="main--word">asdsadasd</h1>
-    <div class="description">dasasd</div>
+    <h1 class="main--word">Welcome</h1>
+    <div class="description">{{$store.state.auth.cartId}}</div>
     <div>
-    <div class="btns--top">
-        <button class="btn btn-success" @click="$router.push('/nurse')">sdsd</button>
-        <button class="btn btn-success" @click="$router.push('/patient')">sdsd</button>
-    </div>
-    <div class="btns--bot">
-        <button class="btn btn-success" @click="$router.push('/report')">sdsd</button>
-        <button class="btn btn-success" @click="$router.push('/cupboard')">sdsdsd</button>
-    </div>
+      <div class="btns--top">
+          <button class="btn btn-success" @click="$router.push('/nurse')">sdsd</button>
+          <button class="btn btn-success" @click="$router.push('/patient')">sdsd</button>
+      </div>
+      <div class="btns--bot">
+          <button class="btn btn-success" @click="$router.push('/report')">sdsd</button>
+          <button class="btn btn-success" @click="$router.push('/cupboard')">sdsdsd</button>
+      </div>
     </div>
   </div>
 </template>
