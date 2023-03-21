@@ -21,13 +21,13 @@ export const authModule = {
             state.isUser = false
         },
         setUserId(state, userIdP){
-            state.userId += userIdP
+            state.userId = userIdP
         },
         setUsername(state, usernameP){
-            state.username += usernameP
+            state.username = usernameP
         },
         setUserPassword(state, passwordP){
-            state.password += passwordP
+            state.password = passwordP
         },
         setCartId(state, cartIdP){
             state.cartId = cartIdP

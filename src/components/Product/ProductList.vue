@@ -2,19 +2,22 @@
 <template>
   <div class="product-list">
     <div class="list--table" v-for="item in products" :key="item.id">
-      <img :src="item.image" width="280" height="182">
       <div>
-        {{item.name}}
+        <img class="item-image" :src="item.image">
       </div>
-      <div>
-        {{item.price}}
+      <div class="item-div">
+        <p class="item-p">{{item.name}}</p>
       </div>
-      <button 
-        class="btn btn-outline-success" 
-        @click="addCartItem(item.id)"
-      >
-        Add
-      </button>
+      <div class="item-div">
+        <p class="item-p">{{item.price}}₴</p>
+      </div>
+      <div class="btn--add">
+        <button 
+          class="btn btn-outline-success" 
+          @click="addCartItem(item.id)"
+        >Add
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -66,8 +69,7 @@ export default {
 
 <style scoped>
 .btn--add{
-  margin-inline: 190px;
-  margin-block: 40px 50px;
+  margin: 10px;
   background: #d2ffea;
 }
 .list--table{
@@ -75,7 +77,7 @@ export default {
   display: inline-block;
   width: 300px;
   margin-left: 10%;
-  border: 1px solid black;
+  border: 2px solid rgb(42, 67, 4);
   background: white;
 }
 .table{
@@ -100,5 +102,16 @@ td{
 }
 .div__danger{
   width: 130px;
+}
+.item-image{
+  border-bottom: 2px solid rgb(42, 67, 4);
+  width: 297px; 
+  height: 200px;
+}
+.item-div{
+  margin: 10px
+}
+.item-p{
+  font-size: 20px;
 }
 </style>
