@@ -30,7 +30,7 @@
             class="form-control"
             v-model="address"
             type="text"
-            placeholder="Enter a product address"
+            placeholder="Enter an address"
           >
         </div>
         <div class="btn--element">

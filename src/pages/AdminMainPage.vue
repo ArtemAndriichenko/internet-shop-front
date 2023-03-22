@@ -4,8 +4,14 @@
     <div class="description"></div>
     <div>
       <div class="btns--top">
-          <button class="btn btn-success" @click="$router.push('/products')">Products</button>
-          <button class="btn btn-success" @click="$router.push('/cart')">Cart</button>
+        <button class="btn btn-success" @click="$router.push('/products')">Carts</button>
+        <button class="btn btn-success" @click="$router.push('/cart')">CartItems</button>
+        <button class="btn btn-success" @click="$router.push('/cart')">Orders</button>
+      </div>
+      <div class="btns--bot">
+        <button class="btn btn-success" @click="$router.push('/products')">OrderItems</button>
+        <button class="btn btn-success" @click="$router.push('/cart')">Products</button>
+        <button class="btn btn-success" @click="$router.push('/cart')">ProductPrice</button>
       </div>
     </div>
   </div>
@@ -38,7 +44,7 @@ export default {
 <style scoped>
 .main{
   margin-top: 200px;
-  margin-inline: 400px;
+  margin-inline: 350px;
   padding: 50px;
   border: 2px solid #198754;
 }
@@ -64,8 +70,7 @@ export default {
   margin-top: 20px;
 }
 .btn{
-  margin-left: 30px;
-  margin-right: 30px;
-  width: 160px;
+  margin-inline: 40px;
+  width: 170px;
 }
 </style>

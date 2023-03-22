@@ -62,7 +62,7 @@ export default {
     },
     async verificationAuth(){
       if(this.username == 'admin' && this.password == 'admin'){
-          this.$router.push('/main')
+          this.$router.push('/admin/main')
           this.$store.commit('auth/setAuthAdmin')
       } 
 

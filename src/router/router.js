@@ -11,6 +11,7 @@ import OrderItemPage from "../pages/OrderItemPage.vue"
 import ProductByPricePage from "../pages/ProductByPricePage.vue"
 import ProductPage from "../pages/ProductPage.vue"
 import CartPage from "../pages/CartPage.vue"
+import AdminMainPage from "../pages/AdminMainPage.vue"
 
 const routes = [
     {
@@ -56,6 +57,10 @@ const routes = [
     {
         path: '/cart',
         component: CartPage
+    },
+    {
+        path: '/admin/main',
+        component: AdminMainPage
     }
 ]
 
