@@ -31,7 +31,7 @@ const routes = [
         component: AuthPage
     },
     {
-        path: '/admin/regist',
+        path: '/regist',
         component: RegistPage
     },
     {

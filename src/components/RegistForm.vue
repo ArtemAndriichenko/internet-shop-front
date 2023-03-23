@@ -48,7 +48,8 @@ export default {
       password: '',
       passwordAgain: '',
       users: [],
-      isError: false
+      isError: false,
+      userId: 0
     }
   },
   async mounted() {
@@ -67,7 +68,7 @@ export default {
         console.error(error)
       }
     },
-    verificationReg(){
+    async verificationReg(){
       if(this.password != this.passwordAgain){
         this.isError = true
         return
@@ -81,13 +82,26 @@ export default {
       }
 
       this.registration()
+      await new Promise((resolve) => setTimeout(resolve, 50));
       this.$router.push('/auth')
     },
     async registration(){
       try {
-        await axios.post("http://localhost:8081/users", {
+        const response = await axios.post("http://localhost:8081/users", {
           username: this.username,
           password: this.password,
+          headers: {
+            Accept: "application/json",
+          }
+        })
+        this.userId = response.data.id
+      } catch (error){
+        console.error(error)
+      }
+
+      try {
+        await axios.post("http://localhost:8081/carts", {
+          user_id: this.userId,
           headers: {
             Accept: "application/json",
           }
